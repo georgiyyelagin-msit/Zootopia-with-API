@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 
 
-def load_data():
+def load_data(requested_animal):
   """ Loads all data from animal API """
   load_dotenv()
   url = "https://api.api-ninjas.com/v1/animals"
@@ -14,7 +14,7 @@ def load_data():
     "X-Api-Key": os.getenv('API_KEY')
   }
 
-  response = requests.get("https://api.api-ninjas.com/v1/animals?name=fox", headers=headers)
+  response = requests.get(f"https://api.api-ninjas.com/v1/animals?name={requested_animal}", headers=headers)
   return response.json()
 
 
@@ -44,7 +44,11 @@ def serialize_animal(animal_obj):
   return output
 
 
-json_animals_infos_string = load_data()
+def get_users_input():
+  return input("Enter a name of an animal: ")
+
+
+json_animals_infos_string = load_data(get_users_input())
 with open("animals_template.html", "r", encoding="utf-8") as handle:
   html_original_string = handle.read()
 
