@@ -23,11 +23,11 @@ def fetch_data(animal_name):
   """ Loads all data from animal API """
   load_dotenv()
   url = "https://api.api-ninjas.com/v1/animals?name="
-
+  API_KEY = os.getenv('API_KEY')
   headers = {
     "accept": "application/json",
     "content-type": "application/json",
-    "X-Api-Key": os.getenv('API_KEY')
+    "X-Api-Key": API_KEY
   }
 
   response = requests.get(f"{url}{animal_name}", headers=headers)
