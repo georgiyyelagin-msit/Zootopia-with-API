@@ -6,7 +6,7 @@ import os
 def load_data(requested_animal):
   """ Loads all data from animal API """
   load_dotenv()
-  url = "https://api.api-ninjas.com/v1/animals"
+  url = "https://api.api-ninjas.com/v1/animals?name="
 
   headers = {
     "accept": "application/json",
@@ -14,7 +14,8 @@ def load_data(requested_animal):
     "X-Api-Key": os.getenv('API_KEY')
   }
 
-  response = requests.get(f"https://api.api-ninjas.com/v1/animals?name={requested_animal}", headers=headers)
+  response = requests.get(f"{url}{requested_animal}", headers=headers)
+  print( response.content  )
   return response.json()
 
 
