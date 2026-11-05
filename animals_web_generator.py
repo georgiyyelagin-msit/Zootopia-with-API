@@ -1,22 +1,8 @@
-import requests
-from dotenv import load_dotenv
-import os
 
+import data_fetcher
 
 def load_data(requested_animal):
-  """ Loads all data from animal API """
-  load_dotenv()
-  url = "https://api.api-ninjas.com/v1/animals?name="
-
-  headers = {
-    "accept": "application/json",
-    "content-type": "application/json",
-    "X-Api-Key": os.getenv('API_KEY')
-  }
-
-  response = requests.get(f"{url}{requested_animal}", headers=headers)
-  print( response.content  )
-  return response.json()
+  return data_fetcher.fetch_data(requested_animal)
 
 
 def key_present_in_dictionary(key, dictionary):
